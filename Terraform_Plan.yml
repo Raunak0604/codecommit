@@ -8,14 +8,18 @@ phases:
       - "wget https://releases.hashicorp.com/terraform/0.14.10/terraform_0.14.10_linux_amd64.zip"
       - "unzip terraform_0.14.10_linux_amd64.zip"
       - "mv terraform /usr/local/bin/"
+
   pre_build:
     commands:
       - terraform init
 
   build:
     commands:
-      - terraform plan
+      - terraform plan -out=tfplan
+    finally:
+      - echo Creating manual approval action for Terraform plan
+      - aws codepipeline put-job-success-result --job-id $CODEPIPELINE_JOB_ID
 
   # post_build:
   #   commands:
-  #     - echo terraform $TF_COMMAND_P completed on `date`
+  #     - terraform apply -auto-approve tfplan
