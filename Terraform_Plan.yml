@@ -16,9 +16,7 @@ phases:
   build:
     commands:
       - terraform plan -out=tfplan
-    finally:
-      - echo Creating manual approval action for Terraform plan
-      - aws codepipeline put-job-success-result --job-id $CODEPIPELINE_JOB_ID
+    when: manual
 
   # post_build:
   #   commands:
