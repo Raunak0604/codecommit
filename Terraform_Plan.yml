@@ -10,7 +10,7 @@ phases:
       - "mv terraform /usr/local/bin/"
   pre_build:
     commands:
-      - terraform -chdir=Terraform init -input=false
+      - terraform init -input=false
 
   build:
     commands:
