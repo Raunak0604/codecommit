@@ -14,8 +14,8 @@ phases:
 
   build:
     commands:
-      - terraform -chdir=Terraform $TF_COMMAND_P -input=false -no-color
+      - terraform plan
 
-  post_build:
-    commands:
-      - echo terraform $TF_COMMAND_P completed on `date`
+  # post_build:
+  #   commands:
+  #     - echo terraform $TF_COMMAND_P completed on `date`
